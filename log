@@ -1,0 +1,11 @@
+[2025-10-13 18:16:15] --Start Session--
+[2025-10-13 18:16:29] User 'zathras' logged in successfully.
+[2025-10-13 18:16:31] Shell exited by user command.
+[2025-10-13 18:16:31] --Logout/EOF--
+[2025-10-13 18:17:28] --Start Session--
+[2025-10-13 18:17:37] Failed login attempt for username: jack
+[2025-10-13 18:17:44] Failed login attempt for username: test1
+[2025-10-13 18:17:47] User 'jack' logged in successfully.
+[2025-10-13 18:18:01] Added new user: nick
+[2025-10-13 18:18:05] Shell exited by user command.
+[2025-10-13 18:18:05] --Logout/EOF--
