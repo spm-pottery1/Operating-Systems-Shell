@@ -117,7 +117,7 @@ int main() {
             if(std::cin >> command) {
                 
                 if(command == "exit") {
-                    log_message("Shell exited by user command."); // Added log for exit
+                    log_message("Shell exited by user command.");
                     exitCode = 1;
                 } else if(command == "adduser") {
                     addUser(loginPath);
