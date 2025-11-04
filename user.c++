@@ -37,4 +37,29 @@ struct user {
     const std::vector<File>& getFiles() const { 
         return files; 
     }
+
+    // Setters
+    void setUsername(const std::string& u) { 
+        username = u; 
+    }
+
+    void setPassword(const std::string& p) { 
+        password = p; 
+    }
+
+    void addDirectory(const Directory& dir) { 
+        directories.push_back(dir); 
+    }
+
+    void addFile(const File& file) { 
+        files.push_back(file); 
+    }
+
+    int NextDirId() { 
+        return ++dirIdCounter; 
+    }
+
+    int NextFileId() { 
+        return ++fileIdCounter; 
+    }
 };
