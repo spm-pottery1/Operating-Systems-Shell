@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "directory.c++"
+#include "file.c++"
 
 
 
@@ -14,6 +15,7 @@ struct user {
         int userId;
         int dirIdCounter = 0;
         int fileIdCounter = 0;
+        int permissions = 0; // Placeholder for future permission management
 
         
 
@@ -36,6 +38,14 @@ struct user {
     }
     const std::vector<File>& getFiles() const { 
         return files; 
+    }
+
+    int getUserId() const { 
+        return userId; 
+    }
+
+    int getPermissions() const { 
+        return permissions; 
     }
 
     // Setters
@@ -61,5 +71,21 @@ struct user {
 
     int NextFileId() { 
         return ++fileIdCounter; 
+    }
+
+    void setUserId(int id) { 
+        userId = id; 
+    }
+
+    void setPermissions(int perms) { 
+        permissions = perms; 
+    }
+
+    // toString method
+    std::string toString() const {
+        return "Username: " + username + "\n" +
+               "Password: " + password + "\n" +
+               "Directories: " + std::to_string(directories.size()) + "\n" +
+               "Files: " + std::to_string(files.size());
     }
 };

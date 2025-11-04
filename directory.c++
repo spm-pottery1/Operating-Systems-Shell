@@ -6,6 +6,7 @@
 struct Directory {
 private:
     int id;
+    int fileIdCounter = 0;
     std::string dirName;
     std::string dirPath;
     std::string owner; 
@@ -23,6 +24,10 @@ private:
     //Getters
     int getId() const {
         return id;
+    }
+
+    int getNextFileId() {
+        return ++fileIdCounter;
     }
 
     std::string getDirName() const {
@@ -45,6 +50,13 @@ private:
         return files;
     }
 
+    std::vector<File> getFile(int n) const {
+        if (n < 0 || n >= files.size()) {
+            return std::vector<File>();  // Return empty vector if index is out of bounds
+        }
+        return std::vector<File>{files[n]};
+    }
+
     std::string getSubdirectoryNames() const {
         std::string names;
         for (const auto& subdir : subdirectories) {
@@ -62,6 +74,8 @@ private:
         }
         return names;
     }   
+
+    
 
     std::string toString() const {
         return "Directory[ID=" + std::to_string(id) + ", Name=" + dirName + ",\n" +
