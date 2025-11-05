@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 #include "directory.c++"
-#include "file.c++"
-
-
+#include <fstream>
+#include <sstream>
+#include <vector>
 
 struct user {
     private:
@@ -88,4 +88,30 @@ struct user {
                "Directories: " + std::to_string(directories.size()) + "\n" +
                "Files: " + std::to_string(files.size());
     }
+
+    void buildUser() {
+    // Note: The file stream object should be userFile, not users.txt, 
+    // but assuming this is the definition within user.c++:
+    std::ifstream userFile("users.txt"); 
+    if (!userFile.is_open()) {
+        // Log an error or handle the failure gracefully
+        std::cerr << "Warning: Could not open users.txt in buildUser for auxiliary data." << std::endl;
+        return; 
+    }
+    std::string line;
+    while (std::getline(userFile, line)) {
+        std::istringstream iss(line);
+        std::string u, p; 
+        // Temporarily read username and password to find the correct line
+        if (iss >> u >> p) {
+            // Found the line for the current user
+            if (u == username) {
+                // Read additional data as needed
+                password = p;
+                return; 
+            }
+        }
+    // File automatically closes when userFile goes out of scope (RAII)
+    }
+}
 };
