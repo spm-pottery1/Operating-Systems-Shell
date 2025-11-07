@@ -11,6 +11,7 @@ struct user {
         std::string password;
         std::vector<Directory> directories;
         std::vector<File> files;
+        std::string filePath = "C:/Users/spm51/Documents/users.txt";
         
         int userId;
         int dirIdCounter = 0;
