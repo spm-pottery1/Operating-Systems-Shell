@@ -8,6 +8,7 @@ struct login {
         std::string checkUsername;
         user currentUser = user("root", "root");
         bool loggedIn = false;
+        std::string filePath = "C:/Users/spm51/Documents/users.txt";
     public:
         login() {}
 
@@ -30,7 +31,7 @@ struct login {
         // Method to check if a user exists
 user checkUser(std::string username) const {
 
-    std::ifstream userFile("C:/Users/spm51/Documents/users.txt");
+    std::ifstream userFile(filePath);
     if(!userFile.is_open()) {
         std::cerr << "No open file in login::checkUser" << std::endl;
         return user("", ""); // Return empty user on file open failure

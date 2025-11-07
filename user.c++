@@ -93,10 +93,10 @@ struct user {
     void buildUser() {
     // Note: The file stream object should be userFile, not users.txt, 
     // but assuming this is the definition within user.c++:
-    std::ifstream userFile("users.txt"); 
+    std::ifstream userFile(filePath); 
     if (!userFile.is_open()) {
         // Log an error or handle the failure gracefully
-        std::cerr << "Warning: Could not open users.txt in buildUser for auxiliary data." << std::endl;
+        std::cerr << "Warning: Could not open " << filePath << " in buildUser for auxiliary data." << std::endl;
         return; 
     }
     std::string line;
