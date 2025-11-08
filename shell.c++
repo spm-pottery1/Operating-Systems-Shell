@@ -4,10 +4,13 @@
 #include <unordered_map>
 #include <ctime> 
 #include "login.c++"
+#include "colonel.c++"
 
 // Reads credentials from the `login` file in the repository root.
 // File format: one credential per line: "username password"
 // Returns a map of username -> password.
+
+
 static void login_user(login &handler) {
     bool login = handler.authenticate();
     if (login) {
@@ -17,10 +20,12 @@ static void login_user(login &handler) {
         std::cout << "Login failed." << std::endl;
     }
 }
-
 int main() {    
 
     login loginHandler;
+    colonel shellCommander;
+    std::cout << "DEBUG(MAIN) Colonel componets loaded correctly" << std::endl;
+
     login_user(loginHandler);
     while(loginHandler.isLoggedIn() == true) {
         std::cout << "Shell>> ";
@@ -30,10 +35,8 @@ int main() {
             loginHandler.setLoggedIn(false);
             std::cout << "Logged out successfully." << std::endl;
         } else {
-            std::cout << "Unknown command: " << command << std::endl;
+            shellCommander.parseCommand(command);
+        }
     }
-
-
     return 0;
-}
 };

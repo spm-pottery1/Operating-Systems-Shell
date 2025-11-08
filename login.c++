@@ -28,6 +28,10 @@ struct login {
             return loggedIn;
         }
 
+        std::string getFilePath() const {
+            return filePath;
+        }
+
         // Method to check if a user exists
 user checkUser(std::string username) const {
 
