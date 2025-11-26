@@ -65,6 +65,10 @@
         "ranges": "cpp",
         "span": "cpp",
         "text_encoding": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "iomanip": "cpp",
+        "xlocmon": "cpp",
+        "xloctime": "cpp",
+        "sstream": "cpp"
     }
 }
