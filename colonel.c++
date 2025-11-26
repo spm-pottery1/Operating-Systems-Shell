@@ -23,6 +23,7 @@ struct colonel {
     }
 
     void initColonel() {
+        std::string argument;
         // Initialize kernel components here
         /*
             Something like:
@@ -32,6 +33,7 @@ struct colonel {
             command_id_counter = command_id;  
         */
         buildCommand("help", {});
+        buildCommand("adduser", {"testuser"});
         buildCommand("exit", {});
         std::cout << "DEBUG(COLONEL.C++, initColonel()): Colonel initialized with " 
                   << command_list.size() << " commands." << std::endl;
@@ -44,6 +46,9 @@ struct colonel {
         while (ss >> command) {
             parsed_command.push_back(command);
 
+        }
+        for(const auto& token : parsed_command) {
+            std::cout << "DEBUG(COLONEL.C++, getParsedCommand()): Token: " << token << std::endl;
         }
         return parsed_command;
     }
@@ -63,44 +68,53 @@ struct colonel {
         initColonel();
     }
 
+
     // Method to parse and execute a command
     const std::string parseCommand(const std::string& user_command) {
-    std::vector<std::string> tokens = getParsedCommand(user_command);
-    
-    // 1. Check for empty command
-    if (tokens.empty()) {
-        return ""; // Nothing to do
-    }
+        std::vector<std::string> tokens = getParsedCommand(user_command);
+        //Debugging output
+        std::cout << "DEBUG(COLONEL.C++, parseCommand()): Parsed command tokens:";
+        for (const auto& token : tokens) {
+        std::cout << "\n" << token;
+        }
+        std::cout << std::endl; 
 
-    // 2. Only check the FIRST token for the command name
-    const std::string& command_name = tokens[0];
-    int cmd_id = commandExists(command_name); 
 
-    if (cmd_id != -1) {
-        std::cout << "DEBUG(COLONEL.C++, parseCommand()): Executing command ID: " << cmd_id << std::endl;
-        switch(cmd_id) {
-            case 1: // help command
-                {
-                    helpCommand helpCmd;
-                    helpCmd.execute();
-                    return "Help command executed.";
-                }
-            case 2: //adduser command
-                {
+        // 1. Check for empty command
+        if (tokens.empty()) {
+            return ""; // Nothing to do
+        }
+
+        // 2. Only check the FIRST token for the command name
+        const std::string& command_name = tokens[0];
+        int cmd_id = commandExists(command_name); 
+
+        if (cmd_id != -1) {
+            std::cout << "DEBUG(COLONEL.C++, parseCommand()): Executing command ID: " << cmd_id << std::endl;
+            switch(cmd_id) {
+                case 1: // help command
+                    {
+                        helpCommand helpCmd;
+                        helpCmd.execute();
+                        return "Help command executed.";
+                    }
+                case 2: //adduser command
+                    {
                     // Placeholder for adduser command logic
                     std::vector<std::string> args(tokens.begin() + 1, tokens.end());
                     addUserCommand addUserCmd(args);
+                    addUserCmd.execute();
                     return "AddUser command executed.";
-                }
-            default:
-                return "Command execution logic not implemented yet.";
+                    }
+                default:
+                    return "Command execution logic not implemented yet.";
+            }
         }
-    }
-    else {
-        std::cout << "Command not found: " << command_name << std::endl;
-        return "";
-    }
-    }
+        else {
+            std::cout << "Command not found: " << command_name << std::endl;
+            return "";
+        }
+}
 
 
 

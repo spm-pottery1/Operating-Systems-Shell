@@ -30,7 +30,7 @@ int main() {
     while(loginHandler.isLoggedIn() == true) {
         std::cout << "Shell>> ";
         std::string command;
-        std::cin >> command;
+        std::getline(std::cin, command);
         if (command == "exit") {
             loginHandler.setLoggedIn(false);
             std::cout << "Logged out successfully." << std::endl;
